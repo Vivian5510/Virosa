@@ -1,6 +1,9 @@
 package com.rosy.virosa.blog.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.rosy.virosa.common.domain.ResponseResult;
 import com.rosy.virosa.common.domain.entity.Article;
+import com.rosy.virosa.common.domain.vo.HotArticleVo;
 import com.rosy.virosa.common.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,5 +20,12 @@ public class ArticleController {
     @RequestMapping("/test")
     public List<Article> TestService() {
         return articleService.list();
+    }
+
+    @RequestMapping("/hotArticle")
+    public ResponseResult<List<HotArticleVo>> getHotArticleList() {
+        List<HotArticleVo> res = BeanUtil.copyToList(articleService.hotArticleList(), HotArticleVo.class);
+        
+        return ResponseResult.okResult(res);
     }
 }
