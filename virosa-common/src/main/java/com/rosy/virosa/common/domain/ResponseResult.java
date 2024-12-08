@@ -1,7 +1,7 @@
 package com.rosy.virosa.common.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.rosy.virosa.common.enums.HttpRespCodeEnum;
+import com.rosy.virosa.common.enums.AppHttpStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,28 +22,28 @@ public class ResponseResult<T> implements Serializable {
     T data;
 
     public ResponseResult() {
-        this.code = HttpRespCodeEnum.SUCCESS.getCode();
-        this.msg = HttpRespCodeEnum.SUCCESS.getMsg();
+        this.code = AppHttpStatusEnum.SUCCESS.getCode();
+        this.msg = AppHttpStatusEnum.SUCCESS.getMsg();
         this.data = null;
     }
 
-    public static ResponseResult<Void> okResult() {
+    public static <T> ResponseResult<T> okResult() {
         return new ResponseResult<>();
     }
 
     public static <T> ResponseResult<T> okResult(T data) {
-        return new ResponseResult<>(HttpRespCodeEnum.SUCCESS.getCode(), HttpRespCodeEnum.SUCCESS.getMsg(), data);
+        return new ResponseResult<>(AppHttpStatusEnum.SUCCESS.getCode(), AppHttpStatusEnum.SUCCESS.getMsg(), data);
     }
 
-    public static ResponseResult<Void> errorResult(int code, String msg) {
+    public static <T> ResponseResult<T> errorResult(int code, String msg) {
         return new ResponseResult<>(code, msg, null);
     }
 
-    public static ResponseResult<Void> errorResult(HttpRespCodeEnum enums) {
-        return new ResponseResult<>(enums.getCode(), enums.getMsg(), null);
+    public static <T> ResponseResult<T> errorResult(AppHttpStatusEnum enums, String msg) {
+        return new ResponseResult<>(enums.getCode(), msg, null);
     }
 
-    public static ResponseResult<Void> errorResult(HttpRespCodeEnum enums, String msg) {
-        return new ResponseResult<>(enums.getCode(), msg, null);
+    public static <T> ResponseResult<T> errorResult(AppHttpStatusEnum enums) {
+        return new ResponseResult<>(enums.getCode(), enums.getMsg(), null);
     }
 }

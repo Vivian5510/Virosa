@@ -1,6 +1,5 @@
 package com.rosy.virosa.common.domain.vo;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

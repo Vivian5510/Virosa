@@ -1,6 +1,6 @@
 package com.rosy.virosa.common.constant;
 
-public class HttpRespCodeConstant {
+public class AppHttpStatusConstant {
     public static final int SUCCESS = 200;
 
     public static final int NEED_LOGIN = 401;
@@ -13,4 +13,6 @@ public class HttpRespCodeConstant {
 
     public static final int REQUIRE_USERNAME = 504;
     public static final int LOGIN_ERROR = 505;
+
+    public static final int PARAM_INVALID = 602;
 }
