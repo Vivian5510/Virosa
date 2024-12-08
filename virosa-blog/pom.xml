@@ -14,12 +14,6 @@
             <groupId>com.rosy</groupId>
             <artifactId>virosa-common</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.rosy</groupId>
-            <artifactId>virosa-utilis</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>

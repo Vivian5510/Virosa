@@ -8,6 +8,7 @@ import com.rosy.virosa.common.mapper.CategoryMapper;
 import com.rosy.virosa.common.service.ArticleService;
 import com.rosy.virosa.common.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
     @Autowired
+    @Lazy
     ArticleService articleService;
 
     @Override
