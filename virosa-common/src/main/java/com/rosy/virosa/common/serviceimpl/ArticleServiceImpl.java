@@ -3,20 +3,28 @@ package com.rosy.virosa.common.serviceimpl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rosy.virosa.common.constant.ArticleStatusConstant;
 import com.rosy.virosa.common.domain.entity.Article;
 import com.rosy.virosa.common.mapper.ArticleMapper;
 import com.rosy.virosa.common.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
+
+    @Override
+    public List<Integer> selectCategoryIds() {
+        return baseMapper.selectCategoryIds();
+    }
+
     @Override
     public List<Article> hotArticleList() {
         LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
         /*必须是正式文章*/
-        wrapper.eq(Article::getStatus, 0);
+        wrapper.eq(Article::getStatus, ArticleStatusConstant.ARTICLE_STATUS_PUBLISHED);
         /*按浏览量排序*/
         wrapper.orderByDesc(Article::getViewCount);
         /*只显示前10条*/

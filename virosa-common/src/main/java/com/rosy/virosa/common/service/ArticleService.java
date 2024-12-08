@@ -6,5 +6,7 @@ import com.rosy.virosa.common.domain.entity.Article;
 import java.util.List;
 
 public interface ArticleService extends IService<Article> {
+    List<Integer> selectCategoryIds();
+
     List<Article> hotArticleList();
 }
