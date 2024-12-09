@@ -3,14 +3,12 @@ package com.rosy.virosa.blog.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.rosy.virosa.common.domain.ResponseResult;
 import com.rosy.virosa.common.domain.entity.Article;
+import com.rosy.virosa.common.domain.vo.ArticleDetailVo;
 import com.rosy.virosa.common.domain.vo.ArticleIntroVo;
 import com.rosy.virosa.common.domain.vo.HotArticleVo;
 import com.rosy.virosa.common.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,4 +39,9 @@ public class ArticleController {
         return ResponseResult.okResult(res);
     }
 
+    @GetMapping("/{id}")
+    public ResponseResult<ArticleDetailVo> getArticleDetail(@PathVariable("id") Integer id) {
+        ArticleDetailVo res = BeanUtil.copyProperties(articleService.getArticleDetail(id), ArticleDetailVo.class);
+        return ResponseResult.okResult(res);
+    }
 }

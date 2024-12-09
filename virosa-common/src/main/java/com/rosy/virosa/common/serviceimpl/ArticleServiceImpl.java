@@ -66,4 +66,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
         return articleList;
     }
+
+    @Override
+    public Article getArticleDetail(Integer id) {
+        Article article = getById(id);
+        article.setCategoryName(categoryService.getById(article.getCategoryId()).getName());
+        return article;
+    }
 }
