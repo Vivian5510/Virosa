@@ -1,6 +1,8 @@
 package com.rosy.virosa.blog.config;
 
-import com.rosy.virosa.common.filter.JwtAuthenticationProcessFilter;
+import com.rosy.virosa.blog.filter.JwtAuthenticationProcessFilter;
+import com.rosy.virosa.common.security.CustomAccessDeniedHandler;
+import com.rosy.virosa.common.security.CustomAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,11 @@ public class SecurityConfig {
     @Autowired
     JwtAuthenticationProcessFilter jwtAuthenticationProcessFilter;
 
+    @Autowired
+    CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+    @Autowired
+    CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -44,7 +51,13 @@ public class SecurityConfig {
                         .requestMatchers("/user/login", "/user/register").anonymous()
                         .anyRequest().authenticated()             // 其他请求需认证
                 )
-                .addFilterBefore(jwtAuthenticationProcessFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationProcessFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                )
+                .formLogin(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable);
                 /*.formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/user/login")

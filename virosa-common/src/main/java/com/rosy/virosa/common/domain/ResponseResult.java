@@ -21,14 +21,13 @@ public class ResponseResult<T> implements Serializable {
     String msg;
     T data;
 
-    public ResponseResult() {
-        this.code = AppHttpStatusEnum.SUCCESS.getCode();
-        this.msg = AppHttpStatusEnum.SUCCESS.getMsg();
-        this.data = null;
+    public ResponseResult(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
     public static <T> ResponseResult<T> okResult() {
-        return new ResponseResult<>();
+        return new ResponseResult<>(AppHttpStatusEnum.SUCCESS.getCode(), AppHttpStatusEnum.SUCCESS.getMsg());
     }
 
     public static <T> ResponseResult<T> okResult(T data) {
@@ -36,14 +35,14 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> errorResult(int code, String msg) {
-        return new ResponseResult<>(code, msg, null);
+        return new ResponseResult<>(code, msg);
     }
 
     public static <T> ResponseResult<T> errorResult(AppHttpStatusEnum enums, String msg) {
-        return new ResponseResult<>(enums.getCode(), msg, null);
+        return new ResponseResult<>(enums.getCode(), msg);
     }
 
     public static <T> ResponseResult<T> errorResult(AppHttpStatusEnum enums) {
-        return new ResponseResult<>(enums.getCode(), enums.getMsg(), null);
+        return new ResponseResult<>(enums.getCode(), enums.getMsg());
     }
 }

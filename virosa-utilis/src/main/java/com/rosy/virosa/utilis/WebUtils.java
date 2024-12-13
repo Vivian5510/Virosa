@@ -22,7 +22,7 @@ public class WebUtils {
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(string);
         } catch (IOException e) {
-            log.error("Throwables.getStackTraceAsString: " + Throwables.getStackTraceAsString(e));
+            log.error("Throwables.getStackTraceAsString: {}", Throwables.getStackTraceAsString(e));
         }
         return null;
     }

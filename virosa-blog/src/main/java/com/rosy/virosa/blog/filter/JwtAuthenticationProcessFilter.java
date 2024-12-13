@@ -1,4 +1,4 @@
-package com.rosy.virosa.common.filter;
+package com.rosy.virosa.blog.filter;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.jwt.JWT;
@@ -47,13 +47,13 @@ public class JwtAuthenticationProcessFilter extends OncePerRequestFilter {
                     Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 } else {
-                    log.warn("Redis中没有找到对应的用户信息");
+                    log.info("Redis中没有找到对应的用户信息");
                 }
             } catch (Exception e) {
-                log.warn("用户发送的token非法");
+                log.info("用户发送的token非法");
             }
         } else {
-            log.warn("用户请求没有正确携带token");
+            log.info("用户请求没有携带token");
         }
 
         filterChain.doFilter(request, response);
