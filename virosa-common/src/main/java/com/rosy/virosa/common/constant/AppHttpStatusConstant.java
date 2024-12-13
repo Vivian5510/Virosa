@@ -15,4 +15,5 @@ public class AppHttpStatusConstant {
     public static final int LOGIN_ERROR = 505;
 
     public static final int PARAM_INVALID = 602;
+    public static final Integer PARAM_NOT_NULL = 603;
 }

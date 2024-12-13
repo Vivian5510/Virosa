@@ -16,7 +16,8 @@ public enum AppHttpStatusEnum {
     EMAIL_EXIST(AppHttpStatusConstant.EMAIL_EXIST, "邮箱已注册"),
     REQUIRE_USERNAME(AppHttpStatusConstant.REQUIRE_USERNAME, "必须填写用户名"),
     LOGIN_ERROR(AppHttpStatusConstant.LOGIN_ERROR, "用户名或密码错误"),
-    PARAM_ERROR(AppHttpStatusConstant.PARAM_INVALID, "传递参数错误");
+    PARAM_ERROR(AppHttpStatusConstant.PARAM_INVALID, "传递参数错误"),
+    PARAM_NOT_NULL(AppHttpStatusConstant.PARAM_NOT_NULL, "传递参数错误");
 
     private final Integer code;
     private final String msg;
