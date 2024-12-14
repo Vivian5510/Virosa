@@ -29,10 +29,12 @@
         <fastjson2.version>2.0.53</fastjson2.version>
         <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
         <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
-        <aliyun-sdk-oss.version>3.17.4</aliyun-sdk-oss.version>
+        <aliyun-sdk-oss.version>3.18.1</aliyun-sdk-oss.version>
         <easyexcel.version>4.0.3</easyexcel.version>
         <jjwt.version>0.12.6</jjwt.version>
         <mybatis-plus-jsqlparser.version>3.5.9</mybatis-plus-jsqlparser.version>
+        <qiniu-java-sdk.version>[7.16.0, 7.16.99]</qiniu-java-sdk.version>
+        <gson.version>2.11.0</gson.version>
     </properties>
 
     <modules>
@@ -103,11 +105,23 @@
                 <version>${fastjson2.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
             <!--阿里云OSS-->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>${aliyun-sdk-oss.version}</version>
+            </dependency>
+            <!--七牛云OSS-->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu-java-sdk.version}</version>
             </dependency>
 
             <!--easyexcel-->
@@ -116,6 +130,7 @@
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
             </dependency>
+
 
             <!--jwt依赖-->
             <dependency>

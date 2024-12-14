@@ -6,6 +6,7 @@ spring:
     url: jdbc:mysql://localhost:3306/virosa?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: 101673
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -15,3 +16,11 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
       id-type: auto
+
+oss:
+  qiniuyun:
+    bucket-name: virosa
+    access-key: 8Xps1jRWyIv6dKbl4Nztc_xsRpgulRtlVnmaJYIe
+    secret-key: Fqr2Ya0eMOfTZQGkxdktGbiLAePQVuu3HSb54QMm
+    external-link-domain-name: http://sogoqjp87.hn-bkt.clouddn.com/
+

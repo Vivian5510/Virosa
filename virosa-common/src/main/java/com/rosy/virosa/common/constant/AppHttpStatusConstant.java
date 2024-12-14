@@ -16,4 +16,5 @@ public class AppHttpStatusConstant {
 
     public static final int PARAM_INVALID = 602;
     public static final Integer PARAM_NOT_NULL = 603;
+    public static final Integer FILE_TYPE_ERROR = 604;
 }
