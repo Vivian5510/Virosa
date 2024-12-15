@@ -48,7 +48,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 配置为无状态会话
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/comment/commentList").permitAll()
+                        .requestMatchers("/comment/commentList", "/swagger-ui.html", "/swagger-ui/index.html").permitAll()
                         .requestMatchers("/user/login", "/user/register").anonymous()
                         .anyRequest().authenticated()             // 其他请求需认证
                 )

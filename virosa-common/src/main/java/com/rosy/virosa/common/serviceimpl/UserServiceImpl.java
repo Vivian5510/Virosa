@@ -1,5 +1,6 @@
 package com.rosy.virosa.common.serviceimpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rosy.virosa.common.domain.entity.User;
 import com.rosy.virosa.common.mapper.UserMapper;
@@ -25,6 +26,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public List<String> getPermissionsById(Long id) {
         List<Long> roleIds = baseMapper.getRoleIdsByUserId(id);
         return roleService.getRolesPermissionsByRoleIds(roleIds);
+    }
+
+    @Override
+    public boolean isUserNameExisted(String userName) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUserName, userName);
+        User user = getOne(queryWrapper);
+        return user != null;
+    }
+
+    @Override
+    public boolean isEmailExisted(String email) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getEmail, email);
+        User user = getOne(queryWrapper);
+        return user != null;
     }
 }
 

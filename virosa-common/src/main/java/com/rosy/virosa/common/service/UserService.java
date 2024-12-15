@@ -13,5 +13,9 @@ import java.util.List;
  */
 public interface UserService extends IService<User> {
     List<String> getPermissionsById(Long id);
+
+    boolean isUserNameExisted(String userName);
+
+    boolean isEmailExisted(String email);
 }
 

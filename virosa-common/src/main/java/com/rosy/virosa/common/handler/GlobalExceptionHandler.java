@@ -22,6 +22,6 @@ public class GlobalExceptionHandler {
     public ResponseResult<String> exceptionHandler(Exception e) {
         log.error("Exception occurred: {}", e.getMessage(), e);
 
-        return ResponseResult.errorResult(AppHttpStatusEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ResponseResult.errorResult(AppHttpStatusEnum.SYSTEM_ERROR.getCode(), AppHttpStatusEnum.SYSTEM_ERROR.getMsg());
     }
 }
