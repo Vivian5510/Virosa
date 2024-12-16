@@ -23,7 +23,7 @@ public class ArticleController {
         return articleService.list();
     }
 
-    @RequestMapping("/hotArticle")
+    @GetMapping("/hotArticle")
     public ResponseResult<List<HotArticleVo>> getHotArticleList() {
         List<HotArticleVo> res = BeanUtil.copyToList(articleService.hotArticleList(), HotArticleVo.class);
         return ResponseResult.okResult(res);
@@ -40,8 +40,14 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseResult<ArticleDetailVo> getArticleDetail(@PathVariable("id") Integer id) {
+    public ResponseResult<ArticleDetailVo> getArticleDetail(@PathVariable("id") Long id) {
         ArticleDetailVo res = BeanUtil.copyProperties(articleService.getArticleDetail(id), ArticleDetailVo.class);
         return ResponseResult.okResult(res);
+    }
+
+    @PutMapping("/updateViewCount/{id}")
+    public ResponseResult updateViewCount(@PathVariable("id") Long id) {
+        articleService.updateViewCount(id);
+        return ResponseResult.okResult();
     }
 }

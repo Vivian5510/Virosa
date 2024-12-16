@@ -30,6 +30,7 @@ public class JwtAuthenticationProcessFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.info(request.getRequestURI());
         String token = request.getHeader("token");
         //如果没有携带token，或者携带的token为空的话就放行
         if (Objects.nonNull(token) && StringUtils.hasText(token)) {
@@ -47,13 +48,11 @@ public class JwtAuthenticationProcessFilter extends OncePerRequestFilter {
                     Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 } else {
-                    log.info("Redis中没有找到对应的用户信息");
+                    log.warn("Redis中没有找到对应的用户信息");
                 }
             } catch (Exception e) {
-                log.info("用户发送的token非法");
+                log.warn("用户发送的token非法");
             }
-        } else {
-            log.info("用户请求没有携带token");
         }
 
         filterChain.doFilter(request, response);

@@ -185,4 +185,12 @@ public class RedisUtils {
             return Collections.emptyMap();
         }
     }
+
+    public void incrementCacheMapValue(String key, String hKey, long v) {
+        redisTemplate.boundHashOps(key).increment(hKey, v);
+    }
+
+    public Object getCacheMapValue(String key, Long id) {
+        return redisTemplate.opsForHash().get(key, id.toString());
+    }
 }

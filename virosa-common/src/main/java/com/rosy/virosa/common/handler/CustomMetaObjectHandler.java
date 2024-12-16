@@ -25,9 +25,17 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        CustomUserDetails customUserDetails = (CustomUserDetails) SecurityUtils.getUserDetails();
-        Long userId = customUserDetails.getUser().getId();
-        this.strictUpdateFill(metaObject, "updated_by", Long.class, userId);
-        this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date());
+        Long userId;
+        try {
+            CustomUserDetails customUserDetails = (CustomUserDetails) SecurityUtils.getUserDetails();
+            userId = customUserDetails.getUser().getId();
+        } catch (Exception e) {
+            userId = -1L;
+        }
+
+        if (userId != -1L) {
+            this.strictUpdateFill(metaObject, "updated_by", Long.class, userId);
+            this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date());
+        }
     }
 }

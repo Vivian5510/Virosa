@@ -24,3 +24,10 @@ oss:
     secret-key: Fqr2Ya0eMOfTZQGkxdktGbiLAePQVuu3HSb54QMm
     external-link-domain-name: http://sogoqjp87.hn-bkt.clouddn.com/
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+

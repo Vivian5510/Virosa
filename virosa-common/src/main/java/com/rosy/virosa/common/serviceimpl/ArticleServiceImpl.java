@@ -9,6 +9,7 @@ import com.rosy.virosa.common.domain.entity.Category;
 import com.rosy.virosa.common.mapper.ArticleMapper;
 import com.rosy.virosa.common.service.ArticleService;
 import com.rosy.virosa.common.service.CategoryService;
+import com.rosy.virosa.utilis.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Autowired
     @Lazy
     private CategoryService categoryService;
+
+    @Autowired
+    RedisUtils redisUtils;
 
     @Override
     public List<Integer> selectCategoryIds() {
@@ -68,9 +72,15 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public Article getArticleDetail(Integer id) {
+    public Article getArticleDetail(Long id) {
         Article article = getById(id);
         article.setCategoryName(categoryService.getById(article.getCategoryId()).getName());
+        article.setViewCount((Long) redisUtils.getCacheMapValue("article:viewCount", id));
         return article;
+    }
+
+    @Override
+    public void updateViewCount(Long id) {
+        redisUtils.incrementCacheMapValue("article:viewCount", id.toString(), 1);
     }
 }

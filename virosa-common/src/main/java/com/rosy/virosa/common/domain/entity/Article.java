@@ -58,5 +58,10 @@ public class Article {
     private Integer deleted;
     @Version
     private Integer version;
+
+    public Article(Long id, Long viewCount) {
+        this.id = id;
+        this.viewCount = viewCount;
+    }
 }
 
