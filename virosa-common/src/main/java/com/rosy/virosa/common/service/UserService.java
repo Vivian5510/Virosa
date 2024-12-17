@@ -1,6 +1,7 @@
 package com.rosy.virosa.common.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rosy.virosa.common.domain.entity.Role;
 import com.rosy.virosa.common.domain.entity.User;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface UserService extends IService<User> {
     boolean isUserNameExisted(String userName);
 
     boolean isEmailExisted(String email);
+
+    List<Role> getUserRolesById(Long id);
 }
 

@@ -19,7 +19,7 @@ public class ArticleController {
     ArticleService articleService;
 
     @RequestMapping("/test")
-    public List<Article> TestService() {
+    public List<Article> TestBlog() {
         return articleService.list();
     }
 

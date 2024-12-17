@@ -14,8 +14,6 @@
         <dependency>
             <groupId>com.rosy</groupId>
             <artifactId>virosa-utilis</artifactId>
-
-
         </dependency>
 
         <dependency>

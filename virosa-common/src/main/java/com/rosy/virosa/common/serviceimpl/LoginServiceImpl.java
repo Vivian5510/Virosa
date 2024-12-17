@@ -1,11 +1,15 @@
 package com.rosy.virosa.common.serviceimpl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.jwt.JWTUtil;
 import com.rosy.virosa.common.domain.ResponseResult;
+import com.rosy.virosa.common.domain.entity.Role;
 import com.rosy.virosa.common.domain.entity.User;
+import com.rosy.virosa.common.domain.vo.AdminUserInfoVo;
 import com.rosy.virosa.common.enums.AppHttpStatusEnum;
 import com.rosy.virosa.common.security.CustomUserDetails;
 import com.rosy.virosa.common.service.LoginService;
+import com.rosy.virosa.common.service.RoleService;
 import com.rosy.virosa.common.service.UserService;
 import com.rosy.virosa.utilis.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -32,6 +37,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RoleService roleService;
 
     @Override
     public String login(User user) {
@@ -83,5 +91,20 @@ public class LoginServiceImpl implements LoginService {
 
         userService.save(user);
         return ResponseResult.okResult();
+    }
+
+    @Override
+    public AdminUserInfoVo getAdminUserInfo(Long id) {
+        User user = userService.getById(id);
+
+        List<String> permissions = userService.getPermissionsById(id);
+
+        List<Role> roles = userService.getUserRolesById(id);
+        List<String> roleNames = roles.stream().map(Role::getName).toList();
+
+        AdminUserInfoVo adminUserInfoVo = BeanUtil.copyProperties(user, AdminUserInfoVo.class);
+        adminUserInfoVo.setPermissions(permissions);
+        adminUserInfoVo.setRoles(roleNames);
+        return adminUserInfoVo;
     }
 }

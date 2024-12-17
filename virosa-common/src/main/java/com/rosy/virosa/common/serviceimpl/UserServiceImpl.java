@@ -2,11 +2,13 @@ package com.rosy.virosa.common.serviceimpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rosy.virosa.common.domain.entity.Role;
 import com.rosy.virosa.common.domain.entity.User;
 import com.rosy.virosa.common.mapper.UserMapper;
 import com.rosy.virosa.common.service.RoleService;
 import com.rosy.virosa.common.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
+    @Lazy
     RoleService roleService;
 
     @Override
@@ -42,6 +45,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         queryWrapper.eq(User::getEmail, email);
         User user = getOne(queryWrapper);
         return user != null;
+    }
+
+    @Override
+    public List<Role> getUserRolesById(Long id) {
+        List<Long> roleIds = baseMapper.getRoleIdsByUserId(id);
+        LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(Role::getId, roleIds);
+        return roleService.list(queryWrapper);
     }
 }
 
