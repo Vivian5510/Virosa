@@ -48,7 +48,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 配置为无状态会话
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll()             // 其他请求需认证
+                        .anyRequest().permitAll()      // 其他请求需认证
                 )
                 .addFilterBefore(jwtAuthenticationProcessFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> exceptionHandling

@@ -3,6 +3,8 @@ package com.rosy.virosa.common.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.rosy.virosa.common.domain.entity.Menu;
 
+import java.util.List;
+
 /**
  * 菜单表(Menu)表服务接口
  *
@@ -11,5 +13,6 @@ import com.rosy.virosa.common.domain.entity.Menu;
  */
 public interface MenuService extends IService<Menu> {
 
+    List<Menu> getSubMenus(Long id);
 }
 

@@ -2,6 +2,7 @@ package com.rosy.virosa.common.serviceimpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.rosy.virosa.common.domain.entity.Menu;
 import com.rosy.virosa.common.domain.entity.Role;
 import com.rosy.virosa.common.domain.entity.User;
 import com.rosy.virosa.common.mapper.UserMapper;
@@ -26,7 +27,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     RoleService roleService;
 
     @Override
-    public List<String> getPermissionsById(Long id) {
+    public List<Menu> getMenusById(Long id) {
         List<Long> roleIds = baseMapper.getRoleIdsByUserId(id);
         return roleService.getRolesPermissionsByRoleIds(roleIds);
     }

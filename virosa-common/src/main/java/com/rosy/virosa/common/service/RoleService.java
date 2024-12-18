@@ -1,6 +1,7 @@
 package com.rosy.virosa.common.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.rosy.virosa.common.domain.entity.Menu;
 import com.rosy.virosa.common.domain.entity.Role;
 
 import java.util.List;
@@ -12,6 +13,6 @@ import java.util.List;
  * @since 2024-12-12 22:46:45
  */
 public interface RoleService extends IService<Role> {
-    List<String> getRolesPermissionsByRoleIds(List<Long> roleIds);
+    List<Menu> getRolesPermissionsByRoleIds(List<Long> roleIds);
 }
 

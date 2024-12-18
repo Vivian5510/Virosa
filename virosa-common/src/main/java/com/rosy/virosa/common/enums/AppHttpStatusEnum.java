@@ -16,7 +16,7 @@ public enum AppHttpStatusEnum {
     PHONE_NUMBER_EXIST(AppHttpStatusConstant.PHONE_NUMBER_EXIST, "手机号已注册"),
     EMAIL_EXIST(AppHttpStatusConstant.EMAIL_EXIST, "邮箱已注册"),
 
-    REQUIRE_USERNAME(AppHttpStatusConstant.REQUIRE_USERNAME, "必须填写用户名"),
+    REQUIRE_USERNAME(AppHttpStatusConstant.REQUIRE_USERNAME, "必须填写密码"),
     REQUIRE_EMAIL(AppHttpStatusConstant.REQUIRE_EMAIL, "必须填写邮箱"),
     REQUIRE_PASSWORD(AppHttpStatusConstant.REQUIRE_PASSWORD, "必须填写用户名"),
 

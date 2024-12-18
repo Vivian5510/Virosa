@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 角色表(Role)表服务实现类
@@ -25,15 +24,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     MenuService menuService;
 
     @Override
-    public List<String> getRolesPermissionsByRoleIds(List<Long> roleIds) {
+    public List<Menu> getRolesPermissionsByRoleIds(List<Long> roleIds) {
         List<Long> permissionIds = baseMapper.getRolesPermissionIdsByRoleIds(roleIds);
         LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(Menu::getId, permissionIds);
-        queryWrapper.select(Menu::getMenuName);
-        return menuService.list(queryWrapper)
-                .stream()
-                .map(Menu::getMenuName)
-                .collect(Collectors.toList());
+
+        return menuService.list(queryWrapper);
     }
 }
 

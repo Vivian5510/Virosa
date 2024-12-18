@@ -1,6 +1,7 @@
 package com.rosy.virosa.common.security;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.rosy.virosa.common.domain.entity.Menu;
 import com.rosy.virosa.common.domain.entity.User;
 import com.rosy.virosa.common.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username + " not found");
         }
 
-        List<String> permissions = userService.getPermissionsById(loginUser.getId());
+        List<String> permissions = userService.getMenusById(loginUser.getId())
+                .stream()
+                .map(Menu::getPerms)
+                .toList();
         return new CustomUserDetails(loginUser, permissions);
     }
 }

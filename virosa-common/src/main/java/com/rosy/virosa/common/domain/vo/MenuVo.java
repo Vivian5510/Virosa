@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -29,7 +31,14 @@ public class MenuVo {
     private String perms;
     // 菜单图标
     private String icon;
+    //父菜单Id
+    private Long parentId;
+    //菜单类型
+    private String menuType;
+    //菜单顺序
+    private String orderNum;
 
     private Date createTime;
 
+    List<MenuVo> SubMenus = new ArrayList<>();
 }

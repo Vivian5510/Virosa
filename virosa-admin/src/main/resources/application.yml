@@ -17,4 +17,3 @@ mybatis-plus:
       logic-not-delete-value: 0
       id-type: auto
 
-

@@ -37,6 +37,14 @@ public class Menu {
     private String perms;
     // 菜单图标
     private String icon;
+    //父菜单Id(-1表示没有父菜单，并且最高两级菜单)
+    private Long parentId;
+    //菜单类型
+    private String menuType;
+    //菜单顺序
+    private String orderNum;
+    //判断是否为外链（0是1否）
+    private Integer isFrame;
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
     @TableField(fill = FieldFill.INSERT)
