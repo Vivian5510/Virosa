@@ -13,12 +13,13 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityUtils.getUserDetails();
+        System.out.println("customUserDetails.getUser() = " + customUserDetails.getUser());
         Long userId = customUserDetails.getUser().getId();
 
         //TODO: 在用户注册时自动填充userId时的策略
 
-        this.strictInsertFill(metaObject, "created_by", Long.class, userId);
-        this.strictInsertFill(metaObject, "updated_by", Long.class, userId);
+        this.strictInsertFill(metaObject, "createBy", Long.class, userId);
+        this.strictInsertFill(metaObject, "updateBy", Long.class, userId);
         this.strictInsertFill(metaObject, "createTime", Date.class, new Date());
         this.strictInsertFill(metaObject, "updateTime", Date.class, new Date());
     }

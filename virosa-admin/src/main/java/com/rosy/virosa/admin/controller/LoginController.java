@@ -42,6 +42,12 @@ public class LoginController {
         return ResponseResult.okResult(token);
     }
 
+    @PostMapping("user/logout")
+    public ResponseResult<String> logout() {
+        String userName = loginService.logout();
+        return ResponseResult.okResult(userName);
+    }
+
     @GetMapping("/admin/getInfo")
     public ResponseResult<AdminUserInfoVo> getInfo() {
         CustomUserDetails userDetails = (CustomUserDetails) SecurityUtils.getUserDetails();
